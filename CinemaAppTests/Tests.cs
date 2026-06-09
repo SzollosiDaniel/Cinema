@@ -71,6 +71,9 @@ namespace CinemaApp.Tests
             var screening = CreateDefaultScreening();
             screening.BookSeat("Alice");
             Assert.IsTrue(screening.IsBooked("Alice"));
+            Assert.IsFalse(screening.IsBooked("ksldaékdléa"));
+            screening.CancelBooking("Alice");
+            Assert.IsFalse(screening.IsBooked("Alice"));
         }
         // TODO: foglalás nélküli személyre false-t kell visszaadni
         // TODO: lemondás után ugyanarra a személyre false-t kell visszaadni
