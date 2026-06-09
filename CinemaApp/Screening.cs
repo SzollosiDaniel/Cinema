@@ -23,34 +23,40 @@ namespace CinemaApp
         // Visszatér false ha nincs szabad hely, vagy a személy már foglalt
         public bool BookSeat(string name)
         {
-            throw new NotImplementedException();
+            if (_totalSeats - _bookedNames.Count == 0 || _bookedNames.Contains(name)) return false;
+            _bookedNames.Add(name);
+            return true;
         }
 
         // Visszatér false ha a személy neve nem szerepel a _bookedNames listában
         public bool CancelBooking(string name)
         {
-            throw new NotImplementedException();
+            if (!_bookedNames.Contains(name)) return false;
+            _bookedNames.Remove(name);
+            return true;
         }
 
         public bool IsBooked(string name)
         {
-            throw new NotImplementedException();
+            if (!_bookedNames.Contains(name)) return false;
+            return true;
         }
 
         // Szabad helyek = _totalSeats - _bookedNames.Count
         public int GetAvailableSeats()
         {
-            throw new NotImplementedException();
+            return _totalSeats - _bookedNames.Count;
         }
 
         public int GetBookedCount()
         {
-            throw new NotImplementedException();
+            return _bookedNames.Count;
         }
 
         public bool IsHouseFull()
         {
-            throw new NotImplementedException();
+            if (_totalSeats - _bookedNames.Count == 0) return true;
+            return false;
         }
 
         // -------------------------------------------------------
