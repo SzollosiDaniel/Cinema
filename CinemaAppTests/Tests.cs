@@ -87,6 +87,13 @@ namespace CinemaApp.Tests
             screening.BookSeat("Alice");
             screening.BookSeat("Bob");
             Assert.AreEqual(3, screening.GetAvailableSeats());
+            screening.BookSeat("David");
+            screening.BookSeat("Axel");
+            screening.BookSeat("Asd");
+            Assert.AreEqual(0, screening.GetAvailableSeats());
+            screening = new Screening("Asd", 100);
+            Assert.AreEqual(100, screening.GetAvailableSeats());
+
         }
         // TODO: újonnan létrehozott vetítésnél a szabad helyek száma egyenlő a totalSeats értékével
         // TODO: teli vetítésnél GetAvailableSeats() nullát kell visszaadni
@@ -97,9 +104,12 @@ namespace CinemaApp.Tests
         public void GetBookedCount_AfterBookings()
         {
             var screening = CreateDefaultScreening();
+            Assert.AreEqual(0, screening.GetBookedCount());
             screening.BookSeat("Alice");
             screening.BookSeat("Bob");
             Assert.AreEqual(2, screening.GetBookedCount());
+            screening.CancelBooking("Alice");
+            Assert.AreEqual(1, screening.GetBookedCount());
         }
         // TODO: újonnan létrehozott vetítésnél GetBookedCount() nullát kell visszaadni
         // TODO: lemondás után a foglaltak száma helyesen csökken
@@ -111,8 +121,10 @@ namespace CinemaApp.Tests
         {
             var screening = new Screening("Inception", 2);
             screening.BookSeat("Alice");
+            Assert.IsFalse(screening.IsHouseFull());
             screening.BookSeat("Bob");
             Assert.IsTrue(screening.IsHouseFull());
+            screening.
         }
         // TODO: szabad hellyel rendelkező vetítésnél false-t kell visszaadni
         // TODO: lemondás után a vetítés már nem teli, IsHouseFull() false-t ad vissza
