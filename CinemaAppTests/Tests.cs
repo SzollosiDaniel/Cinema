@@ -124,7 +124,8 @@ namespace CinemaApp.Tests
             Assert.IsFalse(screening.IsHouseFull());
             screening.BookSeat("Bob");
             Assert.IsTrue(screening.IsHouseFull());
-            screening.
+            screening.CancelBooking("Alice");
+            Assert.IsFalse(screening.IsHouseFull());
         }
         // TODO: szabad hellyel rendelkező vetítésnél false-t kell visszaadni
         // TODO: lemondás után a vetítés már nem teli, IsHouseFull() false-t ad vissza
